@@ -1,0 +1,73 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'roboto', sans-serif;
+    color: aliceblue;
+
+}
+
+header {
+    padding: 30px;
+    background: #011627;
+    height: 40px;
+}
+
+.sidenav {
+    width: 240px;
+    background: #011627;
+    position: fixed;
+    height: 100vh;
+    padding: 60px 30px 0 30px;
+    left: -100%;
+    transition: all 0.3s ease;
+    z-index: 2100;
+    top: 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+}
+
+.sidenav.active {
+    left: 0;
+}
+
+.logo {
+    width: 50px;
+}
+
+ul {
+    padding: 0;
+}
+
+ul li {
+    list-style-type: none;
+    margin: 10px 0;
+}
+
+ul li a {
+    color: #eaecef;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 6px;
+}
+
+ul li a:hover,
+ul li a.active {
+    background: #172b4d;
+}
+
+header svg {
+    font-size: 30px;
+}
+
+.main {
+    min-height: calc(100vh - 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: #eaecef;
+    overflow-y: auto;
+}

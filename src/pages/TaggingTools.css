@@ -1,0 +1,148 @@
+/* ... existing styles ... */
+
+.tei-tools-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.tei-tool-panel {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.tei-comments-input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.tei-comment-item {
+    background: white;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+}
+
+.tei-comment-item small {
+    color: #888;
+    font-size: 0.8rem;
+}
+
+.tei-comment-item p {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+}
+
+.tei-history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+    font-size: 0.9rem;
+}
+
+.tei-restore-button {
+    background: #f0ad4e;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.tei-restore-button:hover {
+    background: #ec971f;
+}
+
+.small-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* Attribute Editor Styles */
+.tei-attribute-editor {
+    background-color: #f0f7ff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #cce4fc;
+    margin-bottom: 20px;
+}
+
+.tei-section-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.tei-close-btn {
+    background: transparent;
+    border: 1px solid #2d5a8c;
+    color: #2d5a8c;
+    padding: 2px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.tei-close-btn:hover {
+    background: #2d5a8c;
+    color: white;
+}
+
+.tei-form-group {
+    margin-bottom: 10px;
+}
+
+.selected-annotation {
+    background-color: #e6f3ff !important;
+}
+
+/* Toggle Button Styles */
+.tei-mode-toggle {
+    display: flex;
+    background: #e0e0e0;
+    border-radius: 6px;
+    padding: 2px;
+    margin-top: 5px;
+}
+
+.tei-toggle-btn {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #555;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.tei-toggle-btn.active {
+    background: white;
+    color: #2d5a8c;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    font-weight: bold;
+}
+
+.tei-toggle-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.tei-textarea.read-only {
+    background-color: #f8f9fa;
+    color: #333;
+    cursor: text;
+}
