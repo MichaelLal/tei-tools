@@ -1,16 +1,52 @@
-# React + Vite
+# TEI Annotation Tool
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An AI-powered web application for semantic annotation and tagging of TEI (Text Encoding Initiative) XML documents. This tool simplifies the complex process of creating and validating TEI-compliant digital editions.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **AI-Powered Assistance**: Integration with Google Gemini for automated entity recognition, tag suggestions, and structural validation.
+- **ODD Schema Awareness**: Dynamically parses TEI ODD files to provide context-aware tagging and documentation.
+- **Custom Schema Extension**: Easily add new TEI elements to your active session and export the updated ODD specification.
+- **Real-time Validation**: Syntax and schema validation for XML snippets.
+- **Interactive Tutorial**: Built-in guide to help users understand TEI tagging and AI features.
+- **Safe Export**: Export your annotated text as clean, valid TEI XML.
 
-## React Compiler
+## Technology Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend**: React + Vite
+- **Styling**: Vanilla CSS (Custom Design System)
+- **AI**: Google Gemini API
+- **XML Processing**: DOMParser and manual serialization for high-fidelity export.
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1.  **Clone the repository**:
+    ```bash
+    git clone <repository-url>
+    cd tei-tool
+    ```
+2.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
+3.  **Run in development mode**:
+    ```bash
+    npm run dev
+    ```
+4.  **Configuration**: Provide your **Gemini API Key** in the "Settings" or "Tagging" interface to enable AI features. 
+    - Your key is stored **only in your browser's local storage**.
+    - It is sent directly to Google's Gemini API endpoints.
+    - No backend server is used for this tool, ensuring your keys and data stay private.
+
+## Project Structure
+
+- `src/components`: Reusable UI components (Navbar, Notification, etc.)
+- `src/pages`: Main application views (Tutorial, Tagging, Setup)
+- `src/utils`: Core logic for ODD parsing, XML validation, and AI integration.
+- `src/tei_acallam.odd`: The default ODD schema used for the project.
+
+## Development Note
+This project was built as a student Final Year Project at **University College Cork (UCC)**. It focuses on the intersection of Digital Humanities and Artificial Intelligence.
+
+## License
+MIT License - see [LICENSE](LICENSE) for details.

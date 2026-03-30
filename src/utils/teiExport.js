@@ -1,4 +1,4 @@
-export const generateTEI = (metadata, content, annotations, page) => {
+export const generateTEI = (metadata, content, annotations, page, exportFull = true) => {
   // Helper to escape XML characters
   const escapeXML = (str) => {
     if (!str) return "";
@@ -37,7 +37,23 @@ export const generateTEI = (metadata, content, annotations, page) => {
     return output.split(/\n\s*\n/).map(p => `<p>${p}</p>`).join("\n      ");
   };
 
-  // Construct the full XML
+  // If the user uploaded a full, pre-existing TEI XML file, don't double wrap it, just export it straight!
+  if (content && content.trim().startsWith("<?xml")) {
+    if (!exportFull) {
+      // If we only want the text, strip out the XML header and return just the body content
+      const bodyMatch = content.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+      if (bodyMatch) {
+        return bodyMatch[1].trim();
+      }
+    }
+    return content;
+  }
+
+  if (!exportFull) {
+    return `<div type="page" n="${escapeXML(page)}">\n  <pb n="${escapeXML(page)}"/>\n  ${renderAnnotatedText()}\n</div>`;
+  }
+
+  // Construct the full XML using the user's manual annotations from the app
   return `<?xml version="1.0" encoding="UTF-8"?>
 <TEI xmlns="http://www.tei-c.org/ns/1.0">
   <teiHeader>

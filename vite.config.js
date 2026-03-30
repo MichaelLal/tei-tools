@@ -6,5 +6,8 @@ export default defineConfig({
   server: {
     port: 5173,
     strictPort: false,
+  },
+  optimizeDeps: {
+    exclude: ['xmllint-wasm']
   }
 })

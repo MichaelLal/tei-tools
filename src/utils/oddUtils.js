@@ -10,6 +10,7 @@ export const parseODD = (xmlString) => {
     // 1. ModuleRefs (Standard ODD inclusions)
     const moduleRefs = xmlDoc.getElementsByTagName("moduleRef");
     const modulesMap = {}; // name -> Set(elements)
+    const elementDetails = {}; // ident -> { desc }
 
     for (let i = 0; i < moduleRefs.length; i++) {
         const el = moduleRefs[i];
@@ -18,14 +19,9 @@ export const parseODD = (xmlString) => {
 
         if (key) {
             if (!modulesMap[key]) modulesMap[key] = new Set();
-
             if (include) {
                 const elems = include.split(/\s+/);
                 elems.forEach(e => modulesMap[key].add(e));
-            } else {
-                // If include is missing, it technically implies ALL elements of that module.
-                // We mark this specially or just leave it empty if we can't resolve it without P5 data.
-                // For now, let's look for explicit elementSpecs that might define content for this module.
             }
         }
     }
@@ -36,17 +32,52 @@ export const parseODD = (xmlString) => {
         const el = elementSpecs[i];
         const ident = el.getAttribute("ident");
         const module = el.getAttribute("module") || "uncategorized";
+        
+        const descriptions = {};
+        const descEls = el.getElementsByTagName("desc");
+        for (let j = 0; j < descEls.length; j++) {
+            const lang = descEls[j].getAttribute("xml:lang") || "en";
+            descriptions[lang] = descEls[j].textContent.trim();
+        }
+
+        // Extract example if present in <egXML>
+        let docExample = undefined;
+        let egElements = el.getElementsByTagName("egXML");
+        if (egElements.length === 0) egElements = el.getElementsByTagNameNS("*", "egXML");
+        
+        if (egElements.length > 0) {
+            try {
+                const serializer = new XMLSerializer();
+                const children = egElements[0].childNodes;
+                let exampleStr = "";
+                for (let k = 0; k < children.length; k++) {
+                    exampleStr += serializer.serializeToString(children[k]);
+                }
+                const cleanedStr = exampleStr.trim();
+                if (cleanedStr) {
+                    docExample = cleanedStr;
+                }
+            } catch (e) {
+                console.warn("Could not serialize egXML for", ident, e);
+            }
+        }
 
         if (ident) {
             if (!modulesMap[module]) modulesMap[module] = new Set();
             modulesMap[module].add(ident);
+            elementDetails[ident] = { descriptions, docExample };
         }
     }
 
-    // Convert to array format
+    // Convert to array format with detailed objects
     return Object.entries(modulesMap).map(([name, set]) => ({
         name,
-        elements: Array.from(set).sort()
+        elements: Array.from(set).map(ident => ({
+            id: ident,
+            label: ident,
+            descriptions: elementDetails[ident]?.descriptions || {},
+            docExample: elementDetails[ident]?.docExample
+        })).sort((a, b) => a.id.localeCompare(b.id))
     }));
 };
 

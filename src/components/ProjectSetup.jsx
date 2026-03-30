@@ -64,13 +64,16 @@ const ProjectSetup = ({ onProjectReady, oddFilePath, onODDLoaded, existingOdd })
 
     const handleContinueEditing = () => {
         // Collect all available tags from the ODD modules
-        const availableTags = oddModules.flatMap(m => m.elements).filter(t => t !== "(All elements)" && t);
-        const uniqueTags = [...new Set(availableTags)].sort();
+        const availableTags = oddModules.flatMap(m => m.elements).filter(t => t.id && t.id !== "(All elements)");
+        
+        // Ensure no duplicates by keeping unique objects
+        const uniqueTagsMap = new Map();
+        availableTags.forEach(tag => uniqueTagsMap.set(tag.id, tag));
+        
+        const uniqueTagsArray = Array.from(uniqueTagsMap.values()).sort((a,b) => a.id.localeCompare(b.id));
 
         // Default basic tags if ODD returns nothing (failsafe)
-        const tagsToUse = uniqueTags.length > 0
-            ? uniqueTags.map(t => ({ id: t, label: t }))
-            : null; // Null tells editor to use its defaults, or we can pass defaults here.
+        const tagsToUse = uniqueTagsArray.length > 0 ? uniqueTagsArray : null;
 
         // Jump straight to editor
         onProjectReady({
@@ -87,13 +90,13 @@ const ProjectSetup = ({ onProjectReady, oddFilePath, onODDLoaded, existingOdd })
             <div className="tei-container project-setup-container">
                 <div className="tei-top-section setup-create-layout">
                     <div className="tei-section module-summary">
-                        <h3 className="tei-section-title" style={{ fontSize: '0.8rem' }}>ODD Definitions ({oddModules.length} Modules)</h3>
-                        <div className="odd-modules-list" style={{ fontSize: '0.8rem' }}>
+                        <h3 className="tei-section-title" style={{ fontSize: '1.2rem' }}>ODD Definitions ({oddModules.length} Modules)</h3>
+                        <div className="odd-modules-list" style={{ fontSize: '1.1rem' }}>
                             {oddModules.map((mod) => (
                                 <details key={mod.name} className="module-item">
                                     <summary><strong>{mod.name}</strong></summary>
                                     <div className="module-elements">
-                                        {mod.elements.join(", ")}
+                                        {mod.elements.map(e => e.id).join(", ")}
                                     </div>
                                 </details>
                             ))}

@@ -30,12 +30,12 @@
 
 .tei-comment-item small {
     color: #888;
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 .tei-comment-item p {
     margin: 5px 0 0;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
 }
 
 .tei-history-item {
@@ -47,7 +47,7 @@
     border-radius: 4px;
     margin-bottom: 8px;
     border: 1px solid #ddd;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
 }
 
 .tei-restore-button {
@@ -57,7 +57,7 @@
     padding: 4px 8px;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 .tei-restore-button:hover {
@@ -92,7 +92,7 @@
     padding: 2px 8px;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .tei-close-btn:hover {
@@ -123,7 +123,7 @@
     background: transparent;
     padding: 8px;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     font-weight: 500;
     color: #555;
     border-radius: 4px;

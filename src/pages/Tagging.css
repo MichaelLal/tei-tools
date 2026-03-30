@@ -11,7 +11,7 @@
 }
 
 .tei-title {
-  font-size: 28px;
+  font-size: 34px;
   font-weight: bold;
   margin-bottom: 30px;
   color: #000000;
@@ -44,7 +44,7 @@
 }
 
 .tei-section-title {
-  font-size: 14px;
+  font-size: 19px;
   font-weight: 600;
   margin-bottom: 12px;
   color: #000000;
@@ -63,7 +63,7 @@
   border-radius: 6px;
   border: 1px solid #d0d0d0;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 500;
   transition: all 0.2s;
   text-align: left;
@@ -71,8 +71,11 @@
   color: #000000;
 }
 
-.tei-entity-button:hover {
-  background-color: #1a2d42;
+.tei-entity-button:hover,
+.tei-entity-button:active {
+  background-color: #172b4d;
+  color: #ffffff;
+  border-color: #2d5a8c;
 }
 
 .tei-entity-button-active {
@@ -83,7 +86,7 @@
 
 .tei-label {
   display: block;
-  font-size: 12px;
+  font-size: 17px;
   margin-bottom: 8px;
   color: #b0b9c1;
   font-weight: 500;
@@ -96,7 +99,7 @@
   border: 1px solid #d0d0d0;
   border-radius: 4px;
   color: #000000;
-  font-size: 12px;
+  font-size: 17px;
   cursor: pointer;
 }
 
@@ -107,7 +110,7 @@
   border: 1px solid #d0d0d0;
   border-radius: 4px;
   color: #000000;
-  font-size: 14px;
+  font-size: 18px;
   box-sizing: border-box;
 }
 
@@ -116,24 +119,78 @@
   border-color: #2d5a8c;
 }
 
-.tei-textarea {
+.tei-editor-container {
+  position: relative;
   width: 100%;
-  height: 250px;
-  padding: 15px;
+  height: 400px;
+  margin-bottom: 15px;
   background-color: #ffffff;
   border: 1px solid #d0d0d0;
   border-radius: 8px;
-  color: #000000;
-  font-family: 'Roboto', monospace;
-  font-size: 14px;
-  resize: vertical;
-  margin-bottom: 15px;
+  overflow: hidden;
   box-sizing: border-box;
 }
 
-.tei-textarea:focus {
+.tei-textarea-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: transparent;
+  z-index: 0;
+  pointer-events: none;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-y: auto; /* Match textarea scrollbar space exactly */
+  overflow-x: hidden;
+}
+
+.tei-textarea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  background-color: transparent !important;
+  color: #000000;
+  border: none;
   outline: none;
+  font-family: inherit;
+  line-height: inherit;
+  resize: none;
+  box-sizing: border-box;
+  z-index: 1;
+  font-size: 18px;
+}
+
+/* Ensure backdrop padding and alignment matches textarea exactly */
+.tei-textarea-backdrop {
+  padding: 15px;
+  margin: 0;
+  border: none;
+}
+
+/* Let the container show focus */
+.tei-editor-container:focus-within {
   border-color: #2d5a8c;
+}
+
+/* We also apply textarea rules here so font, line height, etc. match */
+.tei-editor-container {
+  font-family: 'Roboto', monospace;
+  line-height: 1.5;
+}
+
+.tei-highlight {
+  border-radius: 3px;
+  color: transparent !important; /* Keep text transparent */
+  padding: 2px 0;
+  margin: -2px 0;
+  display: inline;
 }
 
 .tei-annotate-button {
@@ -145,7 +202,7 @@
   border-radius: 6px;
   cursor: pointer;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 18px;
   transition: background-color 0.2s;
 }
 
@@ -162,7 +219,7 @@
   border-radius: 6px;
   cursor: pointer;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 18px;
   transition: background-color 0.2s;
 }
 
@@ -188,7 +245,7 @@
   background-color: #ffffff;
   padding: 15px;
   border-radius: 6px;
-  font-size: 13px;
+  font-size: 18px;
   color: #000000;
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -228,14 +285,14 @@
 
 .tei-annotation-type {
   color: #7dd3fc;
-  font-size: 12px;
+  font-size: 16px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .tei-annotation-text {
   margin: 6px 0 0 0;
-  font-size: 13px;
+  font-size: 18px;
   color: #000000;
   font-style: italic;
 }
@@ -261,7 +318,7 @@
 
 .tei-empty-text {
   color: #999999;
-  font-size: 13px;
+  font-size: 17px;
   font-style: italic;
   text-align: center;
   padding: 20px 0;
@@ -296,7 +353,7 @@
   border: 1px solid #d0d0d0;
   border-radius: 6px;
   color: #000000;
-  font-size: 14px;
+  font-size: 17px;
   box-sizing: border-box;
   transition: all 0.2s;
 }
@@ -318,14 +375,14 @@
 }
 
 .tei-label-small {
-  font-size: 11px;
+  font-size: 13px;
   color: #64748b;
   text-transform: uppercase;
   font-weight: 600;
 }
 
 .tei-active-tag {
-  font-size: 14px;
+  font-size: 17px;
   color: #0f172a;
   font-weight: 500;
 }

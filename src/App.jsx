@@ -1,15 +1,16 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar.jsx";
 import Tagging from "./pages/Tagging.jsx";
+import Tutorial from "./pages/Tutorial.jsx";
 import SchemaEditor from "./components/SchemaEditor";
-import SearchTags from "./components/SearchTags";
+
 import { GiHamburgerMenu } from "react-icons/gi";
 import teiOdd from "./tei_acallam.odd?url";
 import "./index.css";
 
 const App = () => {
   const [showNav, setShowNav] = useState(false);
-  const [activeTab, setActiveTab] = useState('home');
+  const [activeTab, setActiveTab] = useState('tutorial');
 
   // Lifted State
   const [projectData, setProjectData] = useState(null);
@@ -17,7 +18,7 @@ const App = () => {
 
   const closeNav = () => setShowNav(false);
 
-  // Called when user starts project from Home
+  // Called when user starts project from Tutorial/Setup
   const handleProjectReady = (data) => {
     setProjectData(data);
     setActiveTab('tagging');
@@ -38,9 +39,11 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <header>
+      <header className="app-header">
         <GiHamburgerMenu onClick={() => setShowNav(!showNav)} />
       </header>
+
+      {showNav && <div className="nav-overlay" onClick={closeNav} />}
 
       <Navbar
         show={showNav}
@@ -50,20 +53,8 @@ const App = () => {
       />
 
       <main className="main">
-        {activeTab === 'home' && (
-          <div className="tei-container">
-            <div className="tei-section" style={{ textAlign: 'center', marginTop: '50px' }}>
-              <h2>Welcome to TEI Editor</h2>
-              <p>Navigate to the <strong>Tagging</strong> tab to start or continue your project.</p>
-              <button
-                className="tei-annotate-button"
-                onClick={() => setActiveTab('tagging')}
-                style={{ marginTop: '20px' }}
-              >
-                Go to Tagging
-              </button>
-            </div>
-          </div>
+        {activeTab === 'tutorial' && (
+          <Tutorial />
         )}
 
         {/* Tagging stays mounted to preserve undo/redo history and text state */}
@@ -77,9 +68,7 @@ const App = () => {
           />
         </div>
 
-        {activeTab === 'search' && (
-          <SearchTags projectData={projectData} />
-        )}
+
 
         {activeTab === 'add-tag' && (
           <SchemaEditor

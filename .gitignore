@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Sensitive and Temporary
+.env
+.env.local
+temp_uCeltic/
+.antigravity/
+.gemini/
+dist/
+node_modules/

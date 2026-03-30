@@ -9,20 +9,13 @@ const Navbar = ({ show, closeNav, activeTab, setActiveTab }) => {
       <ul>
         <li>
           <a
-            className={activeTab === 'home' ? 'active' : ''}
-            onClick={() => { setActiveTab('home'); closeNav(); }}
+            className={activeTab === 'tutorial' ? 'active' : ''}
+            onClick={() => { setActiveTab('tutorial'); closeNav(); }}
           >
-            Home
+            Tutorial
           </a>
         </li>
-        <li>
-          <a
-            className={activeTab === 'search' ? 'active' : ''}
-            onClick={() => { setActiveTab('search'); closeNav(); }}
-          >
-            Search
-          </a>
-        </li>
+
         <li>
           <a
             className={activeTab === 'tagging' ? 'active' : ''}

@@ -6,7 +6,7 @@ body {
     padding: 0;
     font-family: 'roboto', sans-serif;
     color: #eaecef;
-
+    font-size: 18px;
 }
 
 header {
@@ -16,7 +16,7 @@ header {
 }
 
 .sidenav {
-    width: 240px;
+    width: 260px;
     background: #011627;
     position: absolute;
     height: 95vh;
@@ -42,7 +42,7 @@ ul li {
 ul li a {
     color: #eaecef;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 22px;
     display: block;
     padding: 10px 15px;
     border-radius: 6px;
@@ -85,7 +85,7 @@ ul li a.active {
 }
 
 .tei-filter-label {
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 600;
     color: #555;
     display: flex;
@@ -104,7 +104,7 @@ ul li a.active {
     gap: 5px;
     cursor: pointer;
     user-select: none;
-    font-size: 14px;
+    font-size: 17px;
     color: #333;
 }
 
@@ -166,7 +166,7 @@ ul li a.active {
 
 .tei-result-content {
     font-family: 'Georgia', serif;
-    font-size: 15px;
+    font-size: 18px;
     line-height: 1.6;
     color: #333;
 }
@@ -205,7 +205,7 @@ ul li a.active {
     color: white;
     padding: 6px 10px;
     border-radius: 4px;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: normal;
     white-space: pre;
     width: max-content;

@@ -38,7 +38,7 @@ const SchemaEditor = ({ oddContent, onSave, onCancel }) => {
     return (
         <div className="tei-container project-setup-container">
             <div className="tei-section" style={{ maxWidth: '600px', margin: '0 auto' }}>
-                <h2 className="tei-section-title" style={{ fontSize: '1.2rem', marginBottom: '20px' }}>Add New Schema Element</h2>
+                <h2 className="tei-section-title" style={{ fontSize: '1.5rem', marginBottom: '20px' }}>Add New Schema Element</h2>
 
                 {error && (
                     <div style={{
@@ -61,7 +61,7 @@ const SchemaEditor = ({ oddContent, onSave, onCancel }) => {
                         onChange={(e) => { setError(null); setName(e.target.value); }}
                         placeholder="e.g. persName, placeName"
                     />
-                    <small style={{ color: '#666', fontSize: '0.8rem' }}>CamelCase, no spaces, starts with letter.</small>
+                    <small style={{ color: '#666', fontSize: '1rem' }}>CamelCase, no spaces, starts with letter.</small>
                 </div>
 
                 <div className="tei-form-group">
