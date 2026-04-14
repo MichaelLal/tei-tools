@@ -155,9 +155,14 @@ const Tagging = ({ projectData, onUpdate, oddFilePath, onODDLoaded, existingOdd 
     const newSuggestions = [];
     const lowerText = text.toLowerCase();
 
-    taggedStrings.forEach((tagInfo, searchStr) => {
+    // Sort the search strings by length descending to prioritize longer matches
+    const sortedKeys = Array.from(taggedStrings.keys()).sort((a, b) => b.length - a.length);
+
+    sortedKeys.forEach((searchStr) => {
+      const tagInfo = taggedStrings.get(searchStr);
       let startIndex = 0;
       let index;
+
       while ((index = lowerText.indexOf(searchStr, startIndex)) > -1) {
         const endIndex = index + searchStr.length;
 
@@ -168,7 +173,14 @@ const Tagging = ({ projectData, onUpdate, oddFilePath, onODDLoaded, existingOdd 
           (index <= a.start && endIndex >= a.end)
         );
 
-        if (!isAlreadyTagged) {
+        // Check against active suggestions to prevent overlaps
+        const isSuggestionOverlap = newSuggestions.some(s =>
+          (index >= s.start && index < s.end) ||
+          (endIndex > s.start && endIndex <= s.end) ||
+          (index <= s.start && endIndex >= s.end)
+        );
+
+        if (!isAlreadyTagged && !isSuggestionOverlap) {
           newSuggestions.push({
             id: `sug-${index}-${endIndex}`,
             start: index,
@@ -292,7 +304,14 @@ const Tagging = ({ projectData, onUpdate, oddFilePath, onODDLoaded, existingOdd 
       const pendingList = [];
       let matchCount = 0;
 
-      parsedItems.forEach(item => {
+      // Sort items by string length descending to prioritize full phrases over partial matches
+      const sortedItems = parsedItems.sort((a, b) => {
+        const lenA = a.text ? a.text.length : 0;
+        const lenB = b.text ? b.text.length : 0;
+        return lenB - lenA;
+      });
+
+      sortedItems.forEach(item => {
         if (!item.text || !item.type) return;
 
         const searchStr = item.text;
@@ -308,7 +327,14 @@ const Tagging = ({ projectData, onUpdate, oddFilePath, onODDLoaded, existingOdd 
             (index <= a.start && endIndex >= a.end)
           );
 
-          if (!isAlreadyTagged) {
+          // Check against new pending items to prevent AI from overlapping its own suggestions
+          const isPendingOverlap = pendingList.some(p =>
+            (index >= p.start && index < p.end) ||
+            (endIndex > p.start && endIndex <= p.end) ||
+            (index <= p.start && endIndex >= p.end)
+          );
+
+          if (!isAlreadyTagged && !isPendingOverlap) {
             pendingList.push({
               id: `auto-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
               start: index,
